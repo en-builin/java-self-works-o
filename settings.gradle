@@ -1,2 +1,3 @@
 rootProject.name = 'java-self-works-o'
+include 'w01_gradle'
 

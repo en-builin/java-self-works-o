@@ -1,0 +1,22 @@
+plugins {
+    id 'java' // потому что будем билдить
+    id 'com.github.johnrengelman.shadow' // для сборки jar
+}
+
+sourceCompatibility = JavaVersion.VERSION_11 // версия билда
+targetCompatibility = JavaVersion.VERSION_11
+
+dependencies { // зависимости для модуля, указываем без версии, т.к. версии указаны в корневом build.gradle
+    implementation 'com.google.guava:guava'
+}
+
+shadowJar {
+    archiveBaseName.set('gradleBuildJAR')
+    archiveVersion.set('0.1')
+    archiveClassifier.set('')
+    manifest {
+        attributes 'Main-Class': 'en.builin.app.Main'
+    }
+}
+
+tasks.build.dependsOn tasks.shadowJar // чтобы задача сборки jar выполнилась при build
