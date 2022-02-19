@@ -1,3 +1,4 @@
 rootProject.name = 'java-self-works-o'
 include 'w01_gradle'
+include 'w02_arrayList'
 

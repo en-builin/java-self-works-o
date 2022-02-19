@@ -6,8 +6,12 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_11 // версия билда
 targetCompatibility = JavaVersion.VERSION_11
 
-dependencies { // зависимости для модуля, указываем без версии, т.к. версии указаны в корневом build.gradle
+dependencies {
+
+    // зависимости для модуля, указываем без версии, т.к. версии указаны в корневом build.gradle
     implementation 'com.google.guava:guava'
+    // версия будет искаться в родительском build.gradle, там подключен BOM, в нем указана версия
+    implementation 'com.zaxxer:HikariCP'
 }
 
 shadowJar {

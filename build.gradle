@@ -9,6 +9,7 @@ idea {
         languageLevel = 11
     }
     module {
+        // ИДЕЯ: автоматически скачивать исходники и документации
         downloadJavadoc = true
         downloadSources = true
     }
@@ -23,20 +24,22 @@ allprojects {
         mavenCentral()
     }
 
+    // управление зависимостями, подключение BOM для автоматического выбора совместимых версий библиотек
     apply plugin: "io.spring.dependency-management"
     dependencyManagement {
         dependencies {
-//            imports {
-//                mavenBom("org.springframework.boot:spring-boot-dependencies:2.5.2")
-//            }
+            imports {
+                mavenBom("org.springframework.boot:spring-boot-dependencies:2.6.3")
+            }
+            // версия гуавы задана в Versions.guava
             dependency("com.google.guava:guava:${Versions.guava}")
         }
     }
 
-//    configurations.all {
-//        resolutionStrategy {
-//            failOnVersionConflict()
-//        }
+    configurations.all {
+        resolutionStrategy {
+            failOnVersionConflict()
+        }
 //        resolutionStrategy {
 //            force("javax.servlet:servlet-api:2.4")
 //            force("commons-logging:commons-logging:1.1.1")
@@ -46,19 +49,19 @@ allprojects {
 //            force("org.codehaus.jettison:jettison:1.1")
 //            force("net.java.dev.jna:jna:5.8.0")
 //        }
-//    }
+    }
 }
 
-////print versions from BOM
-//task managedVersions {
-//    doLast {
-//        dependencyManagement.managedVersions.each {
-//            println it
-//        }
-//    }
-//}
+// выводит состав BOM на печать
+task managedVersions {
+    doLast {
+        dependencyManagement.managedVersions.each {
+            println it
+        }
+    }
+}
 
-////gradle -q hello
-//task hello {
-//    println 'Hello world!'
-//}
+//gradle -q hello
+task hello {
+    println 'Hello world!'
+}
